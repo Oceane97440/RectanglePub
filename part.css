@@ -1,0 +1,75 @@
+#rectangle-video { /* hauteur largeur global*/
+    width:300px;height:250px;position:relative;background:#000 
+}
+
+#rectangle-video:hover {cursor:pointer}
+
+#rectangle-video-button-link {
+    background:url(https://image.flaticon.com/icons/svg/565/565276.svg) no-repeat 1% 50% ;border:1px solid #000;/*position style boutton 'en savoir +'*/
+    font-size:0.75em;padding:3px 6px;
+    position:absolute;top:5px;
+    left:5px;border-radius:3px;
+    z-index:100;background:#fff;color:#000}
+
+#rectangle-video-button-link:hover {background:#fff;color:#000}/*couleur boutton*/
+
+#rectangle-video #rectangle-video-volume{  /*boutton volume*/
+    position:absolute;
+    width:20px;
+    height:20px;
+    bottom:8px;
+    right:10px;
+}
+.soundoff{
+    background:transparent url('https://cdn.antenne.re/linfo/IMG/pub/btnVolume.png');/*boutton volume */
+    background-position:bottom left;
+    -webkit-transition:bottom 1s;
+    transition:bottom 1s;
+}
+
+.soundon{
+    background:transparent url('https://cdn.antenne.re/linfo/IMG/pub/btnVolume.png');/*boutton volume */
+    background-position: 0 0;-webkit-transition:bottom 1s;transition:bottom 1s;
+}
+
+#rectangle-video #rectangle-video-progressbar { /*barre de lecture vod*/
+    background:#c00;
+    height:2px;position:absolute
+    ;bottom:0;left:0
+}
+#rectangle-video-blockend #rectangle-video-reload {
+    top:80px; background:url(https://image.flaticon.com/icons/svg/565/565276.svg) no-repeat 1% 50% ;/*icon fin vod*/
+}
+
+#rectangle-video-blockend #rectangle-video-reload::before  { 
+    content : "Rejouer" }
+
+#rectangle-video-blockend #rectangle-video-learnmore {
+    top:90px;background:url(https://image.flaticon.com/icons/svg/685/685815.svg) no-repeat 1% 50%;/*icon 2 fin vod */
+} 
+
+#rectangle-video-blockend #rectangle-video-learnmore::before  {
+     content : "En savoir plus" 
+    }
+
+#rectangle-video-blockend { /*fin vod*/
+    display:none;
+    position:absolute;
+    top:0;left:0;
+    width:300px;
+    height:250px;
+    background:#fff;opacity: 0.8;z-index:99999;cursor:normal;
+ }
+
+ #rectangle-video-blockend #rectangle-video-reload, #rectangle-video-blockend #rectangle-video-learnmore {/*style ecriture fin vod*/
+     padding:5px 0 5px 20px;
+     line-height:20px;position:relative;
+     width:90px;background-size:15px;margin: auto;
+     font-size:0.8em;font-family:"Centhury Gothic";
+     font-weight:bold;
+    }
+
+#rectangle-video-blockend #rectangle-video-play {
+    margin: auto;width:40px;height: 40px; 
+    top:90px;background:url(https://image.flaticon.com/icons/svg/26/26025.svg) no-repeat 1% 50%;}/*boutton play invisible*/
+    

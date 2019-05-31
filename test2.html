@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Test boutton play</title>
+        <style>
+        #demon{
+            width: 60px;
+            height: 60px;
+            position:absolute;
+            
+            bottom:8px;
+            right:10px;
+        }
+        
+        </style>
+    </head>
+    <body>
+
+        <video id="vod" width="40%" height="40%"  muted playsinline controls >
+            <source src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4" type="video/mp4"/>
+        </video>
+
+        <script>
+           var promise= document.getElementById('vod').play()//autoplay
+           var video=document.getElementById("vod");//var boutton play
+            var btnplay=document.getElementById("demo");
+           // btn.style.background="url(play.png) no-repeat";
+           if (promise !== undefined) {
+            promise.then(_ => {
+                // Autoplay started!	
+              }).catch(error => {
+                    //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
+                    myPlayer.muted(true);
+                    myPlayer.play();
+               
+              });
+            }
+
+
+
+           
+                function Play() { //fonction clic boutton
+                    if(video.paused){
+         
+                           video.play();
+        
+                        //btnplay.style.background="url(play.png) no-repeat" ;//boutton on
+                    }else {
+                        video.pause()
+         
+                           //btnplay.style.background="url(pause.png) no-repeat";//boutton off
+                    }
+                    
+               }
+        
+        
+        
+        
+        </script>
+
+
+
+
+    </body>
+
+    <!--
+            var myPlayer = videojs.getPlayer("myPlayerID"),
+            volumeLevel = 0.7;
+
+            //  Attendez que les données chargées soient chargées puis essayez de lire la vidéo
+
+            myPlayer.on("loadedmetadata", function() {
+            // Play video which returns a promise
+            var promise = myPlayer.play();
+
+            //  Utiliser promise de voir si la vidéo est en cours de lecture ou non
+            if (promise !== undefined) {
+                promise
+                .then(function() {
+                    // La lecture automatique a commencé!
+                    
+                    myPlayer.muted(false);
+                    myPlayer.volume(volumeLevel);
+                })
+                .catch(function(error) {
+                    //  La lecture automatique a été empêchée.
+                    // If autoplay prevented mute the video, play video and display unmute button
+                    myPlayer.muted(true);
+                    myPlayer.play();
+                });
+            }
+            });
+
+
+    -->
+
+
+
+
+
+</html>
