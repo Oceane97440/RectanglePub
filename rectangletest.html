@@ -61,11 +61,29 @@
             if (promise !== undefined) {
               promise.then(_ => {
                 // Autoplay started!	
+                myPlayer.muted(false);
+                myPlayer.volume(volumeLevel);
+                
               }).catch(error => {
                     //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
             
-                    myPlayer.muted(true);
-                    myPlayer.play();
+                    videoARP.muted(true);
+                    videoARP.play();
+                     var button = document.createElement("button")
+               
+                button.addEventListener("click", function() {
+                     video.muted(false);
+                    video.volume(volumeLevel);
+                    playerContainer.removeChild(button);
+                });
+               
+                button.textContent = "Unmute";
+                button.classList.add("inner");
+               
+
+               
+               
+                playerContainer.appendChild(button);
               });
             }
         

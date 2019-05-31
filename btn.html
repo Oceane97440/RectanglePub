@@ -1,0 +1,94 @@
+<style>
+   
+  body {
+    background-color: #111;
+    color: #fff;
+  }
+  
+  .video-js {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .outer {
+    width: 610px;
+    height: 344px;
+    border: 1px solid blue;
+    position: relative;
+  }
+  
+  .inner {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+  }
+  </style>
+
+
+
+
+<div id="playerContainer" class="outer"> <!--https://support.brightcove.com/fr/brightcove-player-sample-autoplay-unmute-button-->
+    <video-js  id="myPlayerID"
+      data-video-id="5755775186001"
+      data-account="1752604059001"
+      data-player="default"
+      data-embed="default"
+      data-application-id
+      class="video-js"
+      controls
+      playsinline></video-js>
+  </div>
+  <script src="https://players.brightcove.net/1752604059001/default_default/index.min.js"></script>
+
+  <script>
+  var myPlayer = videojs.getPlayer("myPlayerID"),
+  volumeLevel = 0.7;
+
+// +++ Attendez de charger les données puis essayez  play video +++
+myPlayer.on("loadedmetadata", function() {
+  // Lire la vidéo qui retourne une promise
+  var promise = myPlayer.play();
+  console.log("promise", promise);
+
+  // +++ Utilisez promesse pour voir si la vidéo est en cours de lecture ou non+++
+  if (promise !== undefined) {
+    promise
+      .then(function() {
+        // Autoplay started!
+        // Si la lecture de la vidéo est désactivée et que le volume est réglé
+        myPlayer.muted(false);
+        myPlayer.volume(volumeLevel);
+      })
+      .catch(function(error) {
+        // La lecture automatique a été empêchée.
+        // // +++ Si la lecture automatique est impossible, mettre la vidéo en sourdine, la lire et afficher le bouton de désactivation du son +++
+        myPlayer.muted(true);
+        myPlayer.play();
+
+        var button = document.createElement("button");
+
+        // +++ Ajouter un écouteur d'événement du bouton+++
+        button.addEventListener("click", function() {
+          myPlayer.muted(false);
+          myPlayer.volume(volumeLevel);
+          playerContainer.removeChild(button);
+        });
+
+        // +++ Configurez le bouton +++
+        button.textContent = "Unmute";
+        button.classList.add("inner");
+        button.setAttribute(
+          "style",
+          "color:black; background-color:red; width:100px; height:50px; opacity: .4;"
+        );
+
+        // +++ Ajouter le bouton au conteneur +++
+        playerContainer.appendChild(button);
+      });
+  }
+});
+  
+  
+  
+  </script>

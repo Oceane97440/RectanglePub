@@ -13,7 +13,15 @@
             
             bottom:8px;
             right:10px;
+            
         }
+        .inner {
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        }
+
         
         </style>
     </head>
@@ -24,37 +32,55 @@
         </video>
 
         <script>
-           var promise= document.getElementById('vod').play()//autoplay
+          // var promise= document.getElementById('vod').play()//autoplay
            var video=document.getElementById("vod");//var boutton play
             var btnplay=document.getElementById("demo");
            // btn.style.background="url(play.png) no-repeat";
            if (promise !== undefined) {
             promise.then(_ => {
                 // Autoplay started!	
+                
               }).catch(error => {
                     //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
-                    myPlayer.muted(true);
-                    myPlayer.play();
+                    
+                   // video.play();
+                
+                var button = document.createElement("button")
                
+                button.addEventListener("click", function() {
+                     video.muted(false);
+                    video.volume(volumeLevel);
+                    playerContainer.removeChild(button);
+                });
+               
+                button.textContent = "Unmute";
+                button.classList.add("inner");
+               button.setAttribute("style",
+                "color:black; background-color:red; width:100px; height:50px; opacity: .4;"
+                );
+
+               
+               
+                playerContainer.appendChild(button);
               });
             }
 
 
 
            
-                function Play() { //fonction clic boutton
-                    if(video.paused){
+             //   function Play() { //fonction clic boutton
+             //       if(video.paused){
          
-                           video.play();
+             //              video.play();
         
                         //btnplay.style.background="url(play.png) no-repeat" ;//boutton on
-                    }else {
-                        video.pause()
+             //       }else {
+             //           video.pause()
          
                            //btnplay.style.background="url(pause.png) no-repeat";//boutton off
-                    }
+             //       }
                     
-               }
+             //  }
         
         
         
