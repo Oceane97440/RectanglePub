@@ -1,148 +1,98 @@
-<style>
-    #rectangle-video {width:300px;height:250px;position:relative;background:#000}
-    #rectangle-video:hover {cursor:pointer}
-    #rectangle-video-button-link {background:url(https://image.flaticon.com/icons/svg/565/565276.svg) no-repeat 1% 50% ;border:1px solid #000;font-size:0.75em;padding:3px 6px;position:absolute;top:5px;left:5px;border-radius:3px;z-index:100;background:#fff;color:#000}
-    #rectangle-video-button-link:hover {background:#fff;color:#000}
-    #rectangle-video #rectangle-video-volume{position:absolute;width:20px;height:20px;bottom:8px;right:10px;}
-    .soundoff{background:transparent url('https://cdn.antenne.re/linfo/IMG/pub/btnVolume.png');background-position:bottom left;-webkit-transition:bottom 1s;transition:bottom 1s;}
-    .soundon{background:transparent url('https://cdn.antenne.re/linfo/IMG/pub/btnVolume.png');background-position: 0 0;-webkit-transition:bottom 1s;transition:bottom 1s;}
-    #rectangle-video #rectangle-video-progressbar {background:#c00;height:2px;position:absolute;bottom:0;left:0}
-    #rectangle-video-blockend #rectangle-video-reload {top:80px; background:url(https://image.flaticon.com/icons/svg/565/565276.svg) no-repeat 1% 50% ;}
-    #rectangle-video-blockend #rectangle-video-reload::before  { content : "Rejouer" }
-    #rectangle-video-blockend #rectangle-video-learnmore {top:90px;background:url(https://image.flaticon.com/icons/svg/685/685815.svg) no-repeat 1% 50%;}
-    #rectangle-video-blockend #rectangle-video-learnmore::before  { content : "En savoir plus" }
-    #rectangle-video-blockend {display:none;position:absolute;top:0;left:0;width:300px;height:250px;background:#fff;opacity: 0.8;z-index:99999;cursor:normal; }
-    #rectangle-video-blockend #rectangle-video-reload, #rectangle-video-blockend #rectangle-video-learnmore {padding:5px 0 5px 20px;line-height:20px;position:relative;width:90px;background-size:15px;margin: auto;font-size:0.8em;font-family:"Centhury Gothic";font-weight:bold;}
-    #rectangle-video #rectangle-video-play {margin: auto;width:20px;height:20px;top:90px;background:url(https://image.flaticon.com/icons/svg/26/26025.svg) no-repeat 1% 50%;border:1px solid #000;font-size:0.75em;position:absolute;top:auto;left:5px;border-radius:3px;z-index:100;background:#fff;color:#000}
-   
-    #demo{width: 70px; height: 60px;}
-   
-   </style>
-    
-    <div id="rectangle-video">
-        <a id="rectangle-video-button-link" href="https://www.linfo.re" target="_blank">En savoir plus</a>
-        <video id="rectangle-video-player" width="100%" height="100%" muted="muted" preload="auto" autoplay="true">
-          <source type="video/mp4" src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4">
-           
-        </video>
-        <div id="rectangle-video-volume" class="soundoff">&nbsp;</div>
-       
-       
-        <div id="rectangle-video-progressbar"></div>
-         <div id="rectangle-video-blockend">
-            <!--<div id="rectangle-video-play"></div>-->
-            <div id="rectangle-video-reload"></div>
-            <div id="rectangle-video-learnmore"></div>
-           
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Test boutton play</title>
+        <style>
+        #demon{
+            width: 60px;
+            height: 60px;
+            position:absolute;
             
-        </div>
-    <button onclick="playVid()" type="button" id="demo" ></button>
-        
-    </div>
-    
-    <script>
-     var containerARP =  document.getElementById('rectangle-video');
-     var videoARP = document.getElementById('rectangle-video-player');
-     var videoBtnReload = document.getElementById('rectangle-video-reload');
-     var videoBtnPlaye=document.getElementById('')
-     var videoBtnLearnMore = document.getElementById('rectangle-video-learnmore');
-     var videoBtnVolume = document.getElementById('rectangle-video-volume');
-     var videoBtnVolumeSoundOn = document.getElementById('rectangle-video-volume').getElementsByClassName('soundon');
-     var videoBtnVolumeSoundOff = document.getElementById('rectangle-video-volume').getElementsByClassName('soundoff');
-     
-     var minuteur;
-        // Affichage de la durée de la vidéo
-        videoARP.addEventListener('loadedmetadata', function() { minuteur = videoARP.duration; });
-        
-        // Assume "video" is the video node
-        var i = setInterval(function() {
-            // Quand la vidéo est fini : on ferme la fenêtre
-            if(videoARP.ended) { 
-                document.getElementById("rectangle-video-blockend").style.display = "initial";
-            } else { 
-                var percent = ((videoARP.currentTime/minuteur)*100);
-                document.getElementById("rectangle-video-progressbar").style.width = percent + '%'; 
-            }
-        }, 0);
-    
-    var promise = document.querySelector('video').play();
-   // var vid = document.getElementById("rectangle-video-player")
- //   var btnplay=document.getElementById("demo")
- if (promise !== undefined) {
-	  promise.then(_ => {
-		// Autoplay started!	
-	  }).catch(error => {
-			//LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
-	
-		alert('button show play');
-	  });
-	}
-    
+            bottom:8px;
+            right:10px;
+            
+        }
+       
 
-
-
-    
-        function hasClass(element, className) {
-            if (element.classList) {
-                return element.classList.contains(className);
-            } else {
-                return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
-            }
-        }
-    
-        function addClass(element, className) {
-            if (!hasClass(element, className)) {
-                if (element.classList) {
-                  element.classList.add(className);
-                }
-                else {
-                  element.className += ' ' + className;
-                }
-            }
-        }
-    
-        function removeClass(element, className) {
-            if (element.classList) {
-                return element.classList.remove(className);
-            } else {
-                return element.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-            }
-        }
-    
-        function toggleClass(element, className) {
-            if (hasClass(element, className)) {
-                removeClass(element, className);
-            } else {
-                addClass(element, className);
-            }
-        }
-    
-        videoARP.addEventListener("click", function () { window.open('https://www.linfo.re#click'); });	
         
-        videoBtnVolume.addEventListener("click", function () { 
-                // 
-                if(hasClass(videoBtnVolume, 'soundon')) { 
-                    videoARP.muted = true; 
-                    videoARP.volume = 0; 
-                     addClass(videoBtnVolume, "soundoff");  
-                     removeClass(videoBtnVolume, "soundon");
-                } else { 
-                    videoARP.muted = false;
-                    videoARP.volume = 1;
-                    toggleClass(videoBtnVolume, "soundon");
-                }
+        </style>
+    </head>
+    <body>
+
+        <video id="vod" width="40%" height="40%"  muted playsinline controls >
+            <source src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4" type="video/mp4"/>
+            
+        </video>
+        <button onclick="Play()" type="button" id="demo"></button>
+        <script>
+          // var promise= document.getElementById('vod').play()//autoplay
+           var video=document.getElementById("vod");//var boutton play
+            var btnplay=document.getElementById("demo");
+            btn.style.background="url(play.png) no-repeat";
+          if (promise !== undefined) {
+            promise.then(_ => {
+                // Autoplay started!	
                 
-        });	
+              }).catch(error => {
+                    //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
+                    
+                   // video.play();
+                
+              //  var button = document.createElement("button")
+               
+              //  button.addEventListener("click", function() {
+             //        video.muted(false);
+             //       video.volume(volumeLevel);
+             //       playerContainer.removeChild(button);
+            });
+               
+                //button.textContent = "Unmute";
+              //  button.classList.add("inner");
+              // button.setAttribute("style",
+             //   "color:black; background-color:red; width:100px; height:50px; opacity: .4;"
+              //  );
+
+               
+               
+              //  playerContainer.appendChild(button);
+              };
+            
+
+
+
+           
+                function Play() { //fonction clic boutton
+                    if(video.paused){
+         
+                           video.play();
         
-        videoBtnLearnMore.addEventListener("click", function () { 
-            window.open('https://www.linfo.re#click');
-            });	
-        videoBtnReload.addEventListener("click", function () { 
-            toggleClass(videoBtnVolume, "soundon"); 
-            videoARP.muted = false; 
-            videoARP.volume = 1;
-            videoARP.load(); document.getElementById("rectangle-video-blockend").style.display = "none"; 
-            });	
-    </script>
-    
-   <!-- <div id="demo"></div>-->
+                        btnplay.style.background="url(play.png) no-repeat" ;//boutton on
+                    }
+                    else {
+                        video.pause()
+         
+                           btnplay.style.background="url(pause.png) no-repeat";//boutton off
+                    }
+                    
+               }
+        
+        
+        
+        
+        </script>
+
+
+
+
+    </body>
+
+   
+
+
+
+
+
+</html>
