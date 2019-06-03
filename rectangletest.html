@@ -58,34 +58,18 @@
         
           //var promise = document.querySelector('video').play();
         
-            if (promise !== undefined) {
-              promise.then(_ => {
-                // Autoplay started!	
-                myPlayer.muted(false);
-                myPlayer.volume(volumeLevel);
-                
-              }).catch(error => {
-                    //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
-            
-                    videoARP.muted(true);
-                    videoARP.play();
-                     var button = document.createElement("button")
-               
-                button.addEventListener("click", function() {
-                     video.muted(false);
-                    video.volume(volumeLevel);
-                    playerContainer.removeChild(button);
-                });
-               
-                button.textContent = "Unmute";
-                button.classList.add("inner");
-               
+          var promise = document.querySelector('videoc').play();
+    if (promise !== undefined) {
+      promise.then(_ => {
+           // Autoplay started!
+      }).catch(error => {
+            //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
+    //
+    //Afficher un lien <a href="#">Play</a> crée en JS
 
-               
-               
-                playerContainer.appendChild(button);
-              });
-            }
+        
+      });
+    }
         
         
             function hasClass(element, className) {
