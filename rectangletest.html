@@ -58,18 +58,18 @@
         
           //var promise = document.querySelector('video').play();
         
-          var promise = document.querySelector('videoc').play();
-    if (promise !== undefined) {
-      promise.then(_ => {
-           // Autoplay started!
-      }).catch(error => {
+          var promise = document.querySelector('video').play();
+            if (promise !== undefined) {
+                promise.then(_ => {
+         
+                 }).catch(error => {
             //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
-    //
-    //Afficher un lien <a href="#">Play</a> crée en JS
+    
+                    <a href="#">Play</a>
 
         
-      });
-    }
+                  });
+                }
         
         
             function hasClass(element, className) {

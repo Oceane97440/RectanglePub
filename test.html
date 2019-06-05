@@ -22,21 +22,21 @@
     </head>
     <body>
         <div>
-        <video id="vod" width="40%" height="40%"  >
-            <source src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4" type="video/mp4"/>
-            
-        </video>
+            <video id="vod" width="40%" height="40%" controls autoplay >
+                <source src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4" 
+                type="video/mp4"/>
+                
+            </video>
+
         </div>
         <div id="demo" class="soundoff"onclick="Play()">&nbsp;</div>	
-       
-            
-       </div>
+
         <script>
           var promise= document.getElementById('vod').play()//autoplay
            var video=document.getElementById("vod");//var boutton play
             var btnplay=document.getElementById("demo");
-          
-            function Play() { //fonction clic boutton
+
+           function Play() { //fonction clic boutton
                     if(video.paused){
          
                            video.play();
@@ -47,6 +47,7 @@
                         video.pause()
          
                            btnplay.style.background="url(pause.png) no-repeat";//boutton off
+                         //  <a href="https://www.linfo.re/la-reunion">Play</a>
 
                     }
                     
@@ -58,40 +59,9 @@
 
    
 <!--
-   function Play() { //fonction clic boutton
-                    if(video.paused){
-         
-                           video.play();
-        
-                        btnplay.style.background="url(play.png) no-repeat" ;//boutton on
-                    }
-                    else {
-                        video.pause()
-         
-                           btnplay.style.background="url(pause.png) no-repeat";//boutton off
-                            lien.setAttribute('href', 'https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4');
 
-                    }
-                    
-               }
-
- if (promise !== undefined) {
-                promise.then(_ => {
-                    // Autoplay started!	
-                    
-                }).catch(error => {
-                        //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
-                        
-                    // video.play();
-                    
-                 lien.setAttribute('href', 'https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4');
-
-            });
-            
-            };
-         
-
-
+   
+   
 
 
 
