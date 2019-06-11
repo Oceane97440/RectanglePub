@@ -13,14 +13,14 @@
 	#rectangle-video #rectangle-video-blockend #rectangle-video-learnmore::before  { content : "En savoir plus" }
 	#rectangle-video #rectangle-video-blockend {display:none;position:absolute;top:0;left:0;width:300px;height:250px;background:#fff;opacity: 0.8;z-index:99999;cursor:normal; }
 	#rectangle-video #rectangle-video-blockend #rectangle-video-reload, #rectangle-video-blockend #rectangle-video-learnmore {padding:5px 0 5px 20px;line-height:20px;position:relative;width:90px;background-size:15px!important;margin: auto;font-size:0.8em;font-family:"Centhury Gothic";font-weight:bold;}
-	#rectangle-video #rectangle-video-play {display:none}
-	#rectangle-video #rectangle-video-blockend #rectangle-video-play {margin: 90px auto auto 120px;width:40px;height:40px;top:90px;}
-	#rectangle-video #rectangle-video button{border:none;background:url(play.png) no-repeat 1% 50%;width:50px;height:50px}
+	/*#rectangle-video #rectangle-video-play {display:none}*/
+	#rectangle-video-blockend #rectangle-video-play {margin: 90px auto auto 120px;width:40px;height:40px;top:90px;}
+	#rectangle-video-blockend #rectangle-video-play button{border:none;background:url(play.png) no-repeat 1% 50%;width:50px;height:50px}
 </style>
         
 	<div id="rectangle-video">
 		<a id="rectangle-video-button-link" href="https://www.linfo.re" target="_blank">En savoir plus</a>
-		<video id="rectangle-video-player" autoplay preload  width="100%" height="100%">
+		<video id="rectangle-video-player" autoplay preload muted width="100%" height="100%">
 		  <source type="video/mp4" src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4">
 		</video>
 		
@@ -39,7 +39,7 @@
 		var videoBtnPlay=document.getElementById('rectangle-video-play') //recup div btn
 		var videoBtnReload = document.getElementById('rectangle-video-reload');
 		var videoBtnLearnMore = document.getElementById('rectangle-video-learnmore');
-		var videoblocend=document.getElementById('rectangle-video-blockend');
+		var videoblocend=document.getElementById('rectangle-video-blockend');//videoblock end
 		var videoprogressbar=document.getElementById('rectangle-video-progressbar');
 		var videoBtnVolume = document.getElementById('rectangle-video-volume');
 		var videoBtnVolumeSoundOn = document.getElementById('rectangle-video-volume').getElementsByClassName('soundon');
@@ -64,7 +64,9 @@
     var promise = document.querySelector('video').play();
             if (promise !== undefined) {
                 promise.then(_ => {
-         
+
+					videoBtnPlay.style.display="none";//si tout fonctionne aucun block play est visible
+
                  }).catch(error => {
                     //Prob le block end s'affiche avec le bouton play
                    
