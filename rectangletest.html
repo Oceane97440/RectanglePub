@@ -16,12 +16,13 @@
         
         #rectangle-video-blockend #rectangle-video-play {margin: 90px auto auto 120px;width:40px;height:40px;top:90px;}
        button{border: none;}
+
 </style>
         
         <div id="rectangle-video">
 
             <a id="rectangle-video-button-link" href="https://www.linfo.re" target="_blank">En savoir plus</a>
-            <video id="rectangle-video-player" width="100%" height="100%">
+            <video id="rectangle-video-player"  width="100%" height="100%">
               <source type="video/mp4" src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4">
             </video>
 
@@ -67,7 +68,7 @@
     var promise = document.querySelector('video').play();
             if (promise !== undefined) {
                 promise.then(_ => {
-         
+					videoBtnPlay.style.display="none";
                  }).catch(error => {
                     //Prob le block end s'affiche avec le boutton play
                    
@@ -185,7 +186,8 @@
 		addClass(videoBtnVolume,"soundon"); 
 		videoARP.muted = false; 
 		videoARP.volume = 1; 
-		videoARP.load();  videoARP.play();
+		videoARP.load(); 
+		 videoARP.play();
 		document.getElementById("rectangle-video-blockend").style.display = "none"; 
 	});	
 
