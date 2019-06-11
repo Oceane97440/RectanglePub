@@ -1,0 +1,171 @@
+<style>
+	#rectangle-video {width:300px;height:250px;position:relative;background:#000}
+	#rectangle-video:hover {cursor:pointer}
+	#rectangle-video-button-link {background:url(https://image.flaticon.com/icons/svg/565/565276.svg) no-repeat 1% 50% ;border:1px solid #000;font-size:0.75em;padding:3px 6px;position:absolute;top:5px;left:5px;border-radius:3px;z-index:100;background:#fff;color:#000}
+	#rectangle-video-button-link:hover {background:#fff;color:#000}
+	#rectangle-video #rectangle-video-volume{position:absolute;width:20px;height:20px;bottom:8px;right:10px;}
+	#rectangle-video .soundoff{background:transparent url('https://cdn.antenne.re/linfo/IMG/pub/btnVolume.png');background-position:bottom left;-webkit-transition:bottom 1s;transition:bottom 1s;}
+	#rectangle-video .soundon{background:transparent url('https://cdn.antenne.re/linfo/IMG/pub/btnVolume.png');background-position: 0 0;-webkit-transition:bottom 1s;transition:bottom 1s;}
+	#rectangle-video #rectangle-video-progressbar {background:#c00;height:2px;position:absolute;bottom:0;left:0}
+	#rectangle-video #rectangle-video-blockend #rectangle-video-reload {top:80px; background:url(https://image.flaticon.com/icons/svg/565/565276.svg) no-repeat 1% 50% ;}
+	#rectangle-video #rectangle-video-blockend #rectangle-video-reload::before  { content : "Rejouer" }
+	#rectangle-video #rectangle-video-blockend #rectangle-video-learnmore {top:90px;background:url(https://image.flaticon.com/icons/svg/685/685815.svg) no-repeat 1% 50%;}
+	#rectangle-video #rectangle-video-blockend #rectangle-video-learnmore::before  { content : "En savoir plus" }
+	#rectangle-video #rectangle-video-blockend {display:none;position:absolute;top:0;left:0;width:300px;height:250px;background:#fff;opacity: 0.8;z-index:99999;cursor:normal; }
+	#rectangle-video #rectangle-video-blockend #rectangle-video-reload, #rectangle-video-blockend #rectangle-video-learnmore {padding:5px 0 5px 20px;line-height:20px;position:relative;width:90px;background-size:15px!important;margin: auto;font-size:0.8em;font-family:"Centhury Gothic";font-weight:bold;}
+	#rectangle-video #rectangle-video-play {display:none}
+	#rectangle-video #rectangle-video-blockend #rectangle-video-play {margin: 90px auto auto 120px;width:40px;height:40px;top:90px;}
+	#rectangle-video #rectangle-video button{border:none;background:url(play.png) no-repeat 1% 50%;width:50px;height:50px}
+</style>
+        
+	<div id="rectangle-video">
+		<a id="rectangle-video-button-link" href="https://www.linfo.re" target="_blank">En savoir plus</a>
+		<video id="rectangle-video-player" autoplay muted preload width="100%" height="100%">
+		  <source type="video/mp4" src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4">
+		</video>
+		
+		<div id="rectangle-video-volume" class="soundoff">&nbsp;</div>	
+		<div id="rectangle-video-progressbar"></div>
+		<div id="rectangle-video-blockend">
+			<div id="rectangle-video-play"></div>
+			<div id="rectangle-video-reload"></div>
+			<div id="rectangle-video-learnmore"></div>	
+		</div>		
+	</div>
+        
+<script>
+		var containerARP = document.getElementById('rectangle-video');
+		var videoARP = document.getElementById('rectangle-video-player');
+		var videoBtnPlay=document.getElementById('rectangle-video-play') //recup div btn
+		var videoBtnReload = document.getElementById('rectangle-video-reload');
+		var videoBtnLearnMore = document.getElementById('rectangle-video-learnmore');
+		var videoblocend=document.getElementById('rectangle-video-blockend');
+		var videoprogressbar=document.getElementById('rectangle-video-progressbar');
+		var videoBtnVolume = document.getElementById('rectangle-video-volume');
+		var videoBtnVolumeSoundOn = document.getElementById('rectangle-video-volume').getElementsByClassName('soundon');
+		var videoBtnVolumeSoundOff = document.getElementById('rectangle-video-volume').getElementsByClassName('soundoff');
+
+		var minuteur;
+
+        // Affichage de la durée de la vidéo
+        videoARP.addEventListener('loadedmetadata', function() { minuteur = videoARP.duration; });
+	
+	    // Assume "video" is the video node
+        var i = setInterval(function() {
+		// Quand la vidéo est fini : on ferme la fenêtre
+		if(videoARP.ended) { 
+			videoblocend.style.display = "initial";
+		} else { 
+			var percent = ((videoARP.currentTime/minuteur)*100);
+			videoprogressbar.style.width = percent + '%'; 
+		}
+	}, 0);
+        
+    var promise = document.querySelector('video').play();
+            if (promise !== undefined) {
+                promise.then(_ => {
+         
+                 }).catch(error => {
+                    //Prob le block end s'affiche avec le bouton play
+                   
+                    // block-end display bloc(affiche)
+                    videoblocend.style.display="block";
+
+                    // div rejouer/en savoir + ne s'affiche pas
+                    videoBtnLearnMore.style.display="none";
+                    videoBtnReload.style.display="none";
+
+                    //bouton est crée
+                    var button = document.createElement("button");
+                    
+				//	button.innerHTML = "Play";
+                    videoBtnPlay.appendChild(button);
+                 //   button.setAttribute("style","");
+
+					//event du click sur le blockend
+					// bouton lance la vod
+                    button.addEventListener("touchend", function() {
+							videoARP.play();
+							removeClass(videoBtnVolume, "soundoff"); 
+							addClass(videoBtnVolume,"soundon"); 
+							videoBtnPlay.removeChild(button);
+
+							//quand le video est jouer bouton play et le block disparais
+							videoBtnPlay.style.display="none";
+							videoblocend.style.display="none";
+
+							//video fin div rejouer/en savoir + s'affiche
+							videoBtnLearnMore.style.display="block";
+							videoBtnReload.style.display="block";
+                    });
+
+                  });
+            }
+   
+               
+    function hasClass(element, className) {
+		if (element.classList) {
+			return element.classList.contains(className);
+		} else {
+			return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
+		}
+	}
+
+	function addClass(element, className) {
+		if (!hasClass(element, className)) {
+			if (element.classList) {
+			  element.classList.add(className);
+			}
+			else {
+			  element.className += ' ' + className;
+			}
+		}
+	}
+
+	function removeClass(element, className) {
+		if (element.classList) {
+			return element.classList.remove(className);
+		} else {
+			return element.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+		}
+	}
+
+	function toggleClass(element, className) {
+		if (hasClass(element, className)) {
+			removeClass(element, className);
+		} else {
+			addClass(element, className);
+		}
+	}
+
+	videoARP.addEventListener("touchend", function () { window.open('https://www.linfo.re#click'); });	
+	
+	videoBtnVolume.addEventListener("touchend", function () { 			
+			if(hasClass(videoBtnVolume, 'soundon')) { 
+				videoARP.muted = true; 
+				videoARP.volume = 0; 
+				addClass(videoBtnVolume, "soundoff");  
+				removeClass(videoBtnVolume, "soundon");
+			} else { 
+				videoARP.muted = false;
+				videoARP.volume = 1;
+				toggleClass(videoBtnVolume, "soundon");
+			}
+			
+	});	
+	
+	videoBtnLearnMore.addEventListener("touchend", function () { window.open('https://www.linfo.re#click'); });
+	
+	videoBtnReload.addEventListener("touchend", function () { 
+		removeClass(videoBtnVolume, "soundoff"); 
+		addClass(videoBtnVolume,"soundon"); 
+		videoARP.muted = false; 
+		videoARP.volume = 1; 
+		videoARP.load();  
+		videoARP.play();
+		videoblocend.style.display = "none"; 
+	});	
+
+   
+ </script> 
+ <!--<div id="demo"></div>-->

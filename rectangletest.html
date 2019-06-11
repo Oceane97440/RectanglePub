@@ -13,119 +13,182 @@
         #rectangle-video-blockend #rectangle-video-learnmore::before  { content : "En savoir plus" }
         #rectangle-video-blockend {display:none;position:absolute;top:0;left:0;width:300px;height:250px;background:#fff;opacity: 0.8;z-index:99999;cursor:normal; }
         #rectangle-video-blockend #rectangle-video-reload, #rectangle-video-blockend #rectangle-video-learnmore {padding:5px 0 5px 20px;line-height:20px;position:relative;width:90px;background-size:15px;margin: auto;font-size:0.8em;font-family:"Centhury Gothic";font-weight:bold;}
-        #rectangle-video-blockend #rectangle-video-play {margin: auto;width:40px;height:40px;top:90px;background:url(https://image.flaticon.com/icons/svg/26/26025.svg) no-repeat 1% 50%;}
-        </style>
+        
+        #rectangle-video-blockend #rectangle-video-play {margin: 90px auto auto 120px;width:40px;height:40px;top:90px;}
+       button{border: none;}
+</style>
         
         <div id="rectangle-video">
+
             <a id="rectangle-video-button-link" href="https://www.linfo.re" target="_blank">En savoir plus</a>
-            <video id="rectangle-video-player" width="100%" height="100%" muted="muted" preload="auto" autoplay="true">
+            <video id="rectangle-video-player" width="100%" height="100%">
               <source type="video/mp4" src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4">
             </video>
+
             <div id="rectangle-video-volume" class="soundoff">&nbsp;</div>	
-            <div id="rectangle-video-progressbar"></div>
-             <div id="rectangle-video-blockend">
-                <div id="rectangle-video-play"></div>
-                <div id="rectangle-video-reload"></div>
-                <div id="rectangle-video-learnmore"></div>
-                
-            </div>
+	        <div id="rectangle-video-progressbar"></div>
+	        <div id="rectangle-video-blockend">
+		        <div id="rectangle-video-play"></div>
+		        <div id="rectangle-video-reload"></div>
+		        <div id="rectangle-video-learnmore"></div>
+		
+	        </div>
             
         </div>
         
-        <script>
-         var containerARP =  document.getElementById('rectangle-video');
+<script>
+         var containerARP = document.getElementById('rectangle-video');
          var videoARP = document.getElementById('rectangle-video-player');
+         var videoBtnPlay=document.getElementById('rectangle-video-play') //recup div btn
          var videoBtnReload = document.getElementById('rectangle-video-reload');
          var videoBtnLearnMore = document.getElementById('rectangle-video-learnmore');
+         var videoblocend=document.getElementById('rectangle-video-blockend');
+         var videoprogressbar=document.getElementById('rectangle-video-progressbar');
          var videoBtnVolume = document.getElementById('rectangle-video-volume');
-         var videoBtnVolumeSoundOn = document.getElementById('rectangle-video-volume').getElementsByClassName('soundon');
-         var videoBtnVolumeSoundOff = document.getElementById('rectangle-video-volume').getElementsByClassName('soundoff');
-         
-         var minuteur;
+        var videoBtnVolumeSoundOn = document.getElementById('rectangle-video-volume').getElementsByClassName('soundon');
+        var videoBtnVolumeSoundOff = document.getElementById('rectangle-video-volume').getElementsByClassName('soundoff');
+ 
+  var minuteur;
+
             // Affichage de la durée de la vidéo
-            videoARP.addEventListener('loadedmetadata', function() { minuteur = videoARP.duration; });
-            
-            // Assume "video" is the video node
+        videoARP.addEventListener('loadedmetadata', function() { minuteur = videoARP.duration; });
+	
+	        // Assume "video" is the video node
             var i = setInterval(function() {
-                // Quand la vidéo est fini : on ferme la fenêtre
-                if(videoARP.ended) { 
-                    document.getElementById("rectangle-video-blockend").style.display = "initial";
-                } else { 
-                    var percent = ((videoARP.currentTime/minuteur)*100);
-                    document.getElementById("rectangle-video-progressbar").style.width = percent + '%'; 
-                }
-            }, 0);
+		// Quand la vidéo est fini : on ferme la fenêtre
+		if(videoARP.ended) { 
+			document.getElementById("rectangle-video-blockend").style.display = "initial";
+		} else { 
+			var percent = ((videoARP.currentTime/minuteur)*100);
+		document.getElementById("rectangle-video-progressbar").style.width = percent + '%'; 
+		}
+	}, 0);
         
-          //var promise = document.querySelector('video').play();
-        
-          var promise = document.querySelector('video').play();
+    var promise = document.querySelector('video').play();
             if (promise !== undefined) {
                 promise.then(_ => {
          
                  }).catch(error => {
-            //LE CODE DOIT ETRE ICI !!!! Pour le bouton play doit appraitre si la lecture si playauto non démaré
-    
-                    <a href="#">Play</a>
+                    //Prob le block end s'affiche avec le boutton play
+                   
+                 
+                    //block-end display bloc(affiche)
+                    videoblocend.style.display="block";
 
-        
+                    //div rejouer/en savoir + ne s'affiche pas
+                    videoBtnLearnMore.style.display="none";
+                    videoBtnReload.style.display="none";
+
+                    //boutton est crée
+                    var button = document.createElement("button");
+                    
+				//	button.innerHTML = "Play";
+                    videoBtnPlay.appendChild(button);
+                    button.setAttribute(
+          "style",
+          "background:url(play.png) no-repeat 1% 50%;  width:50px; height:50px; "
+        );
+
+					//event du click sur le boutton lance la vod
+                    button.addEventListener("click", function() {
+                        videoARP.play();
+                        removeClass(videoBtnVolume, "soundoff"); 
+		                addClass(videoBtnVolume,"soundon"); 
+                     videoBtnPlay.removeChild(button);
+                     
+                     //quand le video est jouer bouton play et le block disparais
+                     videoBtnPlay.style.display="none";
+                     videoblocend.style.display="none";
+                    
+                     //video fin div rejouer/en savoir + s'affiche
+                     videoBtnLearnMore.style.display="block";
+                    videoBtnReload.style.display="block";
+
+                    });
+
                   });
                 }
+   
         
-        
-            function hasClass(element, className) {
-                if (element.classList) {
-                    return element.classList.contains(className);
-                } else {
-                    return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
-                }
-            }
-        
-            function addClass(element, className) {
-                if (!hasClass(element, className)) {
-                    if (element.classList) {
-                      element.classList.add(className);
-                    }
-                    else {
-                      element.className += ' ' + className;
-                    }
-                }
-            }
-        
-            function removeClass(element, className) {
-                if (element.classList) {
-                    return element.classList.remove(className);
-                } else {
-                    return element.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
-                }
-            }
-        
-            function toggleClass(element, className) {
-                if (hasClass(element, className)) {
-                    removeClass(element, className);
-                } else {
-                    addClass(element, className);
-                }
-            }
-        
-            videoARP.addEventListener("click", function () { window.open('https://www.linfo.re#click'); });	
-            
-            videoBtnVolume.addEventListener("click", function () { 
-                    // 
-                    if(hasClass(videoBtnVolume, 'soundon')) { 
-                        videoARP.muted = true; 
-                        videoARP.volume = 0; 
-                         addClass(videoBtnVolume, "soundoff");  
-                         removeClass(videoBtnVolume, "soundon");
-                    } else { 
-                        videoARP.muted = false;
-                        videoARP.volume = 1;
-                        toggleClass(videoBtnVolume, "soundon");
-                    }
-                    
-            });	
-            
-            videoBtnLearnMore.addEventListener("click", function () { window.open('https://www.linfo.re#click'); });	
-            videoBtnReload.addEventListener("click", function () { toggleClass(videoBtnVolume, "soundon"); videoARP.muted = false; videoARP.volume = 1; videoARP.load(); document.getElementById("rectangle-video-blockend").style.display = "none"; });	
-        </script>
-        
-        <!--<div id="demo"></div>-->
+
+
+
+
+
+
+           
+    function hasClass(element, className) {
+		if (element.classList) {
+			return element.classList.contains(className);
+		} else {
+			return new RegExp('(^| )' + className + '( |$)', 'gi').test(element.className);
+		}
+	}
+
+	function addClass(element, className) {
+		if (!hasClass(element, className)) {
+			if (element.classList) {
+			  element.classList.add(className);
+			}
+			else {
+			  element.className += ' ' + className;
+			}
+		}
+	}
+
+	function removeClass(element, className) {
+		if (element.classList) {
+			return element.classList.remove(className);
+		} else {
+			return element.className = el.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+		}
+	}
+
+	function toggleClass(element, className) {
+		if (hasClass(element, className)) {
+			removeClass(element, className);
+		} else {
+			addClass(element, className);
+		}
+	}
+
+	videoARP.addEventListener("click", function () { window.open('https://www.linfo.re#click'); });	
+	
+	videoBtnVolume.addEventListener("click", function () { 
+			
+			if(hasClass(videoBtnVolume, 'soundon')) { 
+				videoARP.muted = true; 
+				videoARP.volume = 0; 
+				 addClass(videoBtnVolume, "soundoff");  
+				 removeClass(videoBtnVolume, "soundon");
+			} else { 
+				videoARP.muted = false;
+				videoARP.volume = 1;
+				toggleClass(videoBtnVolume, "soundon");
+			}
+			
+	});	
+	
+	videoBtnLearnMore.addEventListener("click", function () { window.open('https://www.linfo.re#click'); });
+	
+	videoBtnReload.addEventListener("click", function () { 
+	toggleClass(videoBtnVolume, "soundon"); 
+	videoARP.muted = false; 
+	videoARP.volume = 1; 
+	videoARP.load(); 
+	document.getElementById("rectangle-video-blockend").style.display = "none"; 
+	}); 
+
+
+	videoBtnReload.addEventListener("click", function () { 
+		removeClass(videoBtnVolume, "soundoff"); 
+		addClass(videoBtnVolume,"soundon"); 
+		videoARP.muted = false; 
+		videoARP.volume = 1; 
+		videoARP.load();  videoARP.play();
+		document.getElementById("rectangle-video-blockend").style.display = "none"; 
+	});	
+
+   
+ </script> 
+ <!--<div id="demo"></div>-->

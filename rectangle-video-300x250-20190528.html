@@ -13,7 +13,7 @@
 #rectangle-video-blockend #rectangle-video-learnmore::before  { content : "En savoir plus" }
 #rectangle-video-blockend {display:none;position:absolute;top:0;left:0;width:300px;height:250px;background:#fff;opacity: 0.8;z-index:99999;cursor:normal; }
 #rectangle-video-blockend #rectangle-video-reload, #rectangle-video-blockend #rectangle-video-learnmore {padding:5px 0 5px 20px;line-height:20px;position:relative;width:90px;background-size:15px;margin: auto;font-size:0.8em;font-family:"Centhury Gothic";font-weight:bold;}
-#rectangle-video-blockend #rectangle-video-play {margin: auto;width:40px;height:40px;top:90px;background:url(https://image.flaticon.com/icons/svg/26/26025.svg) no-repeat 1% 50%;}
+#rectangle-video-blockend #rectangle-video-play {margin: 90px auto;width:40px;height:40px;top:90px;/*background:url(https://image.flaticon.com/icons/svg/26/26025.svg)*/ ;}
 </style>
 
 <div id="rectangle-video">
@@ -23,8 +23,9 @@
 	</video>
 	<div id="rectangle-video-volume" class="soundoff">&nbsp;</div>	
 	<div id="rectangle-video-progressbar"></div>
-	 <div id="rectangle-video-blockend">
-	    <div id="rectangle-video-play"></div>
+	
+	<div id="rectangle-video-blockend">
+		<div id="rectangle-video-play"></div>
 		<div id="rectangle-video-reload"></div>
 		<div id="rectangle-video-learnmore"></div>
 		
@@ -38,9 +39,10 @@
  var videoBtnReload = document.getElementById('rectangle-video-reload');
  var videoBtnLearnMore = document.getElementById('rectangle-video-learnmore');
  var videoBtnVolume = document.getElementById('rectangle-video-volume');
+  
  var videoBtnVolumeSoundOn = document.getElementById('rectangle-video-volume').getElementsByClassName('soundon');
  var videoBtnVolumeSoundOff = document.getElementById('rectangle-video-volume').getElementsByClassName('soundoff');
- 
+
  var minuteur;
 	// Affichage de la durée de la vidéo
 	videoARP.addEventListener('loadedmetadata', function() { minuteur = videoARP.duration; });
@@ -107,7 +109,7 @@
 	videoARP.addEventListener("click", function () { window.open('https://www.linfo.re#click'); });	
 	
 	videoBtnVolume.addEventListener("click", function () { 
-			// 
+			
 			if(hasClass(videoBtnVolume, 'soundon')) { 
 				videoARP.muted = true; 
 				videoARP.volume = 0; 
@@ -121,8 +123,27 @@
 			
 	});	
 	
-	videoBtnLearnMore.addEventListener("click", function () { window.open('https://www.linfo.re#click'); });	
-	videoBtnReload.addEventListener("click", function () { toggleClass(videoBtnVolume, "soundon"); videoARP.muted = false; videoARP.volume = 1; videoARP.load(); document.getElementById("rectangle-video-blockend").style.display = "none"; });	
+	videoBtnLearnMore.addEventListener("click", function () { window.open('https://www.linfo.re#click'); });
+	
+	videoBtnReload.addEventListener("click", function () { 
+	toggleClass(videoBtnVolume, "soundon"); 
+	videoARP.muted = false; 
+	videoARP.volume = 1; 
+	videoARP.load(); 
+	document.getElementById("rectangle-video-blockend").style.display = "none"; 
+	}); 
+
+
+	videoBtnReload.addEventListener("click", function () { 
+		removeClass(videoBtnVolume, "soundoff"); 
+		addClass(videoBtnVolume,"soundon"); 
+		videoARP.muted = false; 
+		videoARP.volume = 1; 
+		videoARP.load(); 
+		document.getElementById("rectangle-video-blockend").style.display = "none"; 
+	});	
+
+
 </script>
 
 <!--<div id="demo"></div>-->
