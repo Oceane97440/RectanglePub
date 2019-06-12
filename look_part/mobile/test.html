@@ -1,0 +1,18 @@
+<a target="_blank" href="https://silentkernel.fr/window-open-sur-safari-ios/" onclick="return showFacebookShare(this);">Partager sur Facebook</a>
+
+<script>
+var isIOS = ( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false );
+
+function showFacebookShare(control)
+{
+  if (!isIOS)
+  {
+    window.open(control.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');
+    return false;
+  }
+  else
+  {
+    return true;
+  }
+}
+</script>
