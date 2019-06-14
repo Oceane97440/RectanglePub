@@ -1,5 +1,5 @@
-<style>
-	#rectangle-video {width:300px;height:250px;position:relative;background:#000}
+<style>/*_ADFC_CUID_*/
+	#rectangle-video {width:300px;height:250px;position:relative;background:#000;font-family:"Centhury Gothic" !important}
 	#rectangle-video:hover {cursor:pointer}
 	#rectangle-video-button-link {background:url(https://image.flaticon.com/icons/svg/565/565276.svg) no-repeat 1% 50% ;border:1px solid #000;font-size:0.75em;padding:3px 6px;position:absolute;top:5px;left:5px;border-radius:3px;z-index:97;background:#fff;color:#000}
 	#rectangle-video-button-link:hover {background:#fff;color:#000}
@@ -12,8 +12,7 @@
 	#rectangle-video #rectangle-video-blockend #rectangle-video-learnmore {top:90px;background:url(https://image.flaticon.com/icons/svg/685/685815.svg) no-repeat 1% 50%;}
 	#rectangle-video #rectangle-video-blockend #rectangle-video-learnmore::before  { content : "En savoir plus" }
 	#rectangle-video #rectangle-video-blockend {display:none;position:absolute;top:0;left:0;width:300px;height:250px;background:#fff;opacity: 0.8; z-index:97;cursor:normal; }
-	#rectangle-video #rectangle-video-blockend #rectangle-video-reload, #rectangle-video-blockend #rectangle-video-learnmore {padding:5px 0 5px 20px;line-height:20px;position:relative;width:90px;background-size:15px!important;margin: auto;font-size:0.8em;font-family:"Centhury Gothic";font-weight:bold;}
-	/*#rectangle-video #rectangle-video-play {display:none}_ADPATH_/*/
+	#rectangle-video #rectangle-video-blockend #rectangle-video-reload, #rectangle-video-blockend #rectangle-video-learnmore {padding:5px 0 5px 20px;line-height:20px;position:relative;width:90px;background-size:15px!important;margin: auto;font-size:0.8em;font-weight:bold;}
 	#rectangle-video-blockend #rectangle-video-play {margin: 90px auto auto 120px;width:40px;height:40px;top:90px;}
 	#rectangle-video-blockend #rectangle-video-play button{border:none;background:url(play.png) no-repeat 1% 50%;width:50px;height:50px; }
 </style>
@@ -21,7 +20,7 @@
 	<div id="rectangle-video">
 		<a id="rectangle-video-button-link" href="https://www.linfo.re" target="_blank">En savoir plus</a>
 		<video id="rectangle-video-player" autoplay preload muted width="100%" height="100%">
-		  <source type="video/mp4" src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/LEADER-PRICE/20190507/LEADER_PRICE-47269/HAPPY_PRICE_10S_CHARAL.mp4">
+		  <source type="video/mp4" src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/S2FOI_QUICK/BURGER_KING-47837/V2.mp4">
 		</video>
 		
 		<div id="rectangle-video-volume" class="soundoff">&nbsp;</div>	
@@ -65,7 +64,7 @@
             if (promise !== undefined) {
                 promise.then(_ => {
 
-					videoBtnPlay.style.display="none";//si tout fonctionne aucun block play est visible
+					videoblocend.style.display="none";//si tout fonctionne aucun block play est visible
 
                  }).catch(error => {
                     //Prob le block end s'affiche avec le bouton play
