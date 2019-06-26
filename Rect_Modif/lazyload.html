@@ -1,7 +1,7 @@
 <script> listImagesARP = new Array();
 
 // Compte le nombre ID sur la page
-window.addEventListener("DOMContentLoaded", function() {
+window.addEventListener("DOMContentLoaded", function() { //
 	if(listImagesARP.length === 0) {
 		document.querySelectorAll("div.advertising-arp").forEach(function(element) {
 			console.log("Canvas : "+element.id); 
@@ -24,7 +24,8 @@ function lazyLoad(targets, attrSource, callback) {
 		var elemTop = document.getElementById(id).getBoundingClientRect().top;
 		var elemBottom = document.getElementById(id).getBoundingClientRect().bottom;
 		elemBottom = elemBottom - ((elemBottom - elemTop) * (1 - adVisibility));
-		elemBottomOFF = elemBottom - (elemBottom - elemTop);
+		elemBottomOFF = elemBottom - (elemBottom - elemTop); 
+		
 
 
 		var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
