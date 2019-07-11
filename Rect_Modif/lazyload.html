@@ -1,7 +1,7 @@
 <script> listImagesARP = new Array();
 
 // Compte le nombre ID sur la page
-window.addEventListener("DOMContentLoaded", function() { //
+window.addEventListener("DOMContentLoaded", function() { //recherche tout les formats de pub
 	if(listImagesARP.length === 0) {
 		document.querySelectorAll("div.advertising-arp").forEach(function(element) {
 			console.log("Canvas : "+element.id); 
@@ -18,10 +18,10 @@ window.addEventListener("DOMContentLoaded", function() { //
 function lazyLoad(targets, attrSource, callback) {
 	var IDsAds = targets || document.querySelectorAll("div.advertising-arp");
 	
-	//function to test if the div is in view
+	//function qui test si la div vod est vu par le visiteur il calcul ecart entre la top et le bottom de la fenettre
 	function isScrolledIntoView(id) {
 	    var adVisibility = 0.5;
-		var elemTop = document.getElementById(id).getBoundingClientRect().top;
+		var elemTop = document.getElementById(id).getBoundingClientRect().top; //recup le  id de video identitifi le position le vod par rapport a la fennetre
 		var elemBottom = document.getElementById(id).getBoundingClientRect().bottom;
 		elemBottom = elemBottom - ((elemBottom - elemTop) * (1 - adVisibility));
 		elemBottomOFF = elemBottom - (elemBottom - elemTop); 

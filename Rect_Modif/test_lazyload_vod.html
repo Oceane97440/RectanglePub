@@ -1,0 +1,71 @@
+
+	<div>
+
+		<video controls id="player">
+		  <source type="video/mp4" src="https://cdn.antennepublicite.re/linfo/IMG/pub/video/S2FOI_QUICK/BURGER_KING-47837/V2.mp4">
+		</video>
+		
+	</div>
+        
+	<script> listImagesARP = new Array();
+
+			// Compte le nombre ID sur la page
+			window.addEventListener("DOMContentLoaded", function() { //recherche tout les formats de pub
+				if(listImagesARP.length === 0) {
+					document.querySelectorAll("div.advertising-arp").forEach(function(element) {
+						console.log("Canvas : "+element.id); 
+						listImagesARP.push(element.id);
+					});
+				} // else {
+					console.log("listImagesARP : "+listImagesARP.length);
+				// }
+			});
+			
+			/*
+			* Chargement des pubs au fur et Ã  mesure
+			*/
+			function lazyLoad(targets, attrSource, callback) {
+				var IDsAds = targets || document.querySelectorAll("div.advertising-arp");
+				
+				//function qui test si la div vod est vu par le visiteur il calcul ecart entre la top et le bottom de la fenettre
+				function isScrolledIntoView(id) {
+					var adVisibility = 0.5;
+					var elemTop = document.getElementById(id).getBoundingClientRect().top; //recup le  id de video identitifi le position le vod par rapport a la fennetre
+					var elemBottom = document.getElementById(id).getBoundingClientRect().bottom;
+					elemBottom = elemBottom - ((elemBottom - elemTop) * (1 - adVisibility));
+					elemBottomOFF = elemBottom - (elemBottom - elemTop); 
+					
+			
+			
+					var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+					console.log("top =" + elemTop);
+					console.log("bottomVisibility =" + elemBottom);
+					console.log("bottomVisibilityOFF =" + elemBottomOFF);
+					return isVisible;
+				}
+			
+				function checkVisible(element) {
+					var rect = element.getBoundingClientRect(),
+					viewHeight = Math.max(document.documentElement.clientHeight, window.innerHeight);		
+					return !(rect.bottom < 0 || rect.top - viewHeight >= 0);
+				}
+			
+			   [].forEach.call(IDsAds, function(advertise) {
+					var id = advertise.getAttribute("id");		
+					// Si la pub est visible et que l'ID Ads est dans le tableau on le charge
+					//--- if ( checkVisible(advertise) && (listImagesARP.length > 0) && listImagesARP.includes(id)) {
+					if ( isScrolledIntoView(id) && (listImagesARP.length > 0) && listImagesARP.includes(id)) {
+						ADTECH.loadAd(advertise.getAttribute('id'));
+						listImagesARP.splice(listImagesARP.indexOf(id),1);
+					}
+				  
+				});
+			  
+			}
+			
+			
+			// Lazy Load on Scroll
+			window.addEventListener("scroll", function() {
+			  lazyLoad();
+			});
+			</script>
